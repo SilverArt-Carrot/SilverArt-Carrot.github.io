@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>代码截图工具之Polacode</title>
+    <url>/2020/03/08/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%E4%B9%8BPolacode/</url>
+    <content><![CDATA[<p>如何为代码裁出一张漂亮的截图呢，推荐一款vscode的代码截图工具Polacode，首先我们先安装最新版的<strong>Polacode-2019</strong>.</p>
+<p><img src="/2020/03/08/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%E4%B9%8BPolacode/install.png" alt="Polacode-2019"></p>
+<p>在代码的编辑区中按下<strong>F1</strong>，这款插件的最大功能在于可以选中我们想要截图的部分，选择<strong>Polacode</strong>按下.</p>
+<p><img src="/2020/03/08/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%E4%B9%8BPolacode/prepare.png" alt></p>
+<p>之后弹出截图预览，我们可以选择设置<strong>阴影</strong>，设置<strong>边框透明度</strong>，背景颜色为自己的vscode主题颜色.</p>
+<p><img src="/2020/03/08/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%E4%B9%8BPolacode/doing.png" alt></p>
+<p>按下截图按钮，就可以保存自己的截图了.</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Beautify代码整洁之道</title>
+    <url>/2020/03/08/Beautify%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/</url>
+    <content><![CDATA[<p>我们都需要整洁美观的代码，推荐一个vscode的代码美化工具，它可以美化Javascript、CSS、HTML、JSON等等。</p>
+<p>首先我们在商店中找到<strong>Beautify</strong>,安装它。</p>
+<p><img src="/2020/03/08/Beautify%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/select.PNG" alt="Beautify"></p>
+<p>有时，我们得到的代码可能时这个样子的</p>
+<p><img src="/2020/03/08/Beautify%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/before.PNG" alt="未格式化的"></p>
+<p>这时，我们只要按下<strong>F1</strong>,选择<strong>Beautify Selection</strong>或者<strong>Beautify file</strong></p>
+<p><img src="/2020/03/08/Beautify%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/doing1.PNG" alt="点击F1"></p>
+<p>就可以格式化为漂亮、美观、易读的格式了</p>
+<p><img src="/2020/03/08/Beautify%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/after.PNG" alt="格式化之后的"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>My first blog</title>
+    <url>/2020/03/07/My-first-blog/</url>
+    <content><![CDATA[<p>开启博客生涯</p>
+]]></content>
+  </entry>
+</search>
