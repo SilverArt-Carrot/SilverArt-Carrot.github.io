@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Django+jquery实现简单ajax</title>
+    <url>/2020/03/10/Django-jquery%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95ajax/</url>
+    <content><![CDATA[<p><strong>Ajax</strong>即“Asynchronous Javascript And XML”（异步 JavaScript 和 XML），是指一种创建交互式、快速动态网页应用的网页开发技术，无需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+<p>简单来说，就是用户不用请求整个网页，只向服务器请求JSON数据等等，实现网页的部分更新。</p>
+<p>首先我们需要在<strong>view.py</strong>文件中引入<strong>JsonResponse方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from django.http import JsonResponse</span><br></pre></td></tr></table></figure>
+
+<p>在试图里定义一个函数来实现返回Json格式的数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def weapons(request, cate_id):</span><br><span class="line">    cate &#x3D; Category.objects.get(pk&#x3D;cate_id)</span><br><span class="line">    weapons_list &#x3D; []</span><br><span class="line">    for weapon in cate.weapon_set.all():</span><br><span class="line">        weapons_list.append(weapon.gun)</span><br><span class="line">    return JsonResponse(&#123;&#39;data&#39;: weapons_list&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>PS:JsonResponse方法内需要传入字典，这里我们从表中获取数据组成字典</p>
+<p>在app下的<strong>url.py</strong>文件中配置URL</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">path(&#39;weapons&#x2F;&lt;int:cate_id&gt;&#x2F;&#39;, views.weapons, name&#x3D;&#39;weapons&#39;),</span><br></pre></td></tr></table></figure>
+
+<p>不过,不要忘了在<strong>template</strong>中添加<strong>jquery库</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.staticfile.org&#x2F;jquery&#x2F;1.10.2&#x2F;jquery.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最后，我们要用JavaScript实现加载服务端传来的JSON数据</p>
+<p>添加方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;li&gt;&lt;button  id&#x3D;&quot;&#123;&#123;wc.id&#125;&#125;&quot; onclick&#x3D;&quot;display_weapons(this)&quot;&gt;&#123;&#123; wc.cate &#125;&#125;&lt;&#x2F;button&gt;&lt;&#x2F;li&gt;&lt;hr&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在我们的js文件中实现HTML中的方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display_weapons &#x3D; function (e) &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: &#39;get&#39;,</span><br><span class="line">        url: &#39;&#x2F;weapon&#x2F;weapons&#x2F;&#39; + e.id,</span><br><span class="line">        dataType: &#39;json&#39;,</span><br><span class="line">        success: function (data, status) &#123;</span><br><span class="line">            console.log(data);</span><br><span class="line">            var d &#x3D; data[&#39;data&#39;];</span><br><span class="line">            var str &#x3D; &#39;&#39;;</span><br><span class="line">            for (var i &#x3D; 0; i &lt; d.length; i++) &#123;</span><br><span class="line">                str +&#x3D; &#39;&lt;li&gt;&#39; + d[i] + &#39;&lt;&#x2F;li&gt;&#39;</span><br><span class="line">            &#125;</span><br><span class="line">            document.getElementById(&#39;display&#39;).innerHTML &#x3D; str;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Successfully，大功告成了。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>好用的Chrome插件</title>
     <url>/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<p>没有Chrome插件，仿佛操作系统没有了应用程序一样。</p>
