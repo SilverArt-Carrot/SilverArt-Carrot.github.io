@@ -100,7 +100,7 @@
 <p>在试图里定义一个函数来实现返回Json格式的数据</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def weapons(request, cate_id):</span><br><span class="line">    cate &#x3D; Category.objects.get(pk&#x3D;cate_id)</span><br><span class="line">    weapons_list &#x3D; []</span><br><span class="line">    for weapon in cate.weapon_set.all():</span><br><span class="line">        weapons_list.append(weapon.gun)</span><br><span class="line">    return JsonResponse(&#123;&#39;data&#39;: weapons_list&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>PS:JsonResponse方法内需要传入字典，这里我们从表中获取数据组成字典</p>
+<p>PS: JsonResponse方法内需要传入字典，这里我们从表中获取数据组成字典</p>
 <p>在app下的<strong>url.py</strong>文件中配置URL</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path(&#39;weapons&#x2F;&lt;int:cate_id&gt;&#x2F;&#39;, views.weapons, name&#x3D;&#39;weapons&#39;),</span><br></pre></td></tr></table></figure>
 
@@ -380,7 +380,7 @@
 </nav>
     
 
-<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://static.runoob.com/assets/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript">
 //<![CDATA[
 if (typeof jQuery == 'undefined') {
