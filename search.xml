@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Captcha Cracker</title>
+    <url>/2020/03/11/Captcha-Cracker/</url>
+    <content><![CDATA[<h2 id="一道简单的暴力枚举算法题"><a href="#一道简单的暴力枚举算法题" class="headerlink" title="一道简单的暴力枚举算法题"></a>一道简单的暴力枚举算法题</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><a href="http://www.02469.com（本网页纯属虚构，如有雷同，纯属巧合），是一个资源丰富的教学资源网站，好学的SK同学经常访问这个网站。通常来说，网站为了安全考虑，登录的时候都需要用户输入验证码，这就让SK同学非常不爽了。" target="_blank" rel="noopener">www.02469.com（本网页纯属虚构，如有雷同，纯属巧合），是一个资源丰富的教学资源网站，好学的SK同学经常访问这个网站。通常来说，网站为了安全考虑，登录的时候都需要用户输入验证码，这就让SK同学非常不爽了。</a></p>
+<p>SK同学希望你能帮他写一个程序来自动识别验证码的内容，验证码由小写字母和阿拉伯数字组成，你需要识别出其中所有的0,2,4,6,9以及这5个数字对应的英文单词，并按照它们在验证码中出现的顺序以数字形式输出。</p>
+<p><strong>输入描述</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一行是一个正整数T(≤ 10)，表示测试数据的组数， 每组测试数据只有一行，包含一个长度不超过100000的只由小写字母和阿拉伯数字组成的非空字符串。</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出描述</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">对于每组测试数据，输出一行字符串，表示识别出的验证码。</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2</span><br><span class="line">onetwothreefourfiveseven</span><br><span class="line">0two4six6siiiiix</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">24</span><br><span class="line">02466</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 - zero</span><br><span class="line">2 - two</span><br><span class="line">4 - four</span><br><span class="line">6 - six</span><br><span class="line">9 - nine</span><br></pre></td></tr></table></figure>
+
+<p><strong>我的代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">n &#x3D; int(input())</span><br><span class="line">for ii in range(n):</span><br><span class="line">    s &#x3D; input()</span><br><span class="line">    l1 &#x3D; [&#39;0&#39;, &#39;2&#39;, &#39;4&#39;, &#39;6&#39;, &#39;9&#39;]</span><br><span class="line">    l2 &#x3D; [&#39;zero&#39;, &#39;two&#39;, &#39;four&#39;, &#39;six&#39;, &#39;nine&#39;]</span><br><span class="line">    j &#x3D; 0</span><br><span class="line">    while j &lt; len(s):</span><br><span class="line">        if s[j] in l1:</span><br><span class="line">            print(s[j], end&#x3D;&#39;&#39;)</span><br><span class="line">            j &#x3D; j + 1</span><br><span class="line">        elif s[j:j + 3] in l2:</span><br><span class="line">            print(l1[l2.index(s[j:j + 3])], end&#x3D;&#39;&#39;)</span><br><span class="line">            j &#x3D; j + 3</span><br><span class="line">        elif s[j:j + 4] in l2:</span><br><span class="line">            print(l1[l2.index(s[j:j + 4])], end&#x3D;&#39;&#39;)</span><br><span class="line">            j &#x3D; j + 4</span><br><span class="line">        else:</span><br><span class="line">            j +&#x3D; 1</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure>
+
+<p>总的来说，这是一道简单的题目，我第一次写出来的时候是得到了正确答案，但是我的代码太冗杂，有多余的变量声明，<br>以及多余的循环语句和判断语句，导致测试时花费了太多时间和不必要的内存。</p>
+<p>Python不像C、C++那样快速，但是Python有列表，这样就非常方便了，而且语言简洁，书写方便。</p>
+<p><strong>在别人的代码里看到了正则表达式</strong>，这确实是在字符串匹配中高效的方法。</p>
+<p>PS：题目来自牛客网</p>
+]]></content>
+  </entry>
+  <entry>
     <title>你为啥在游戏里花怎么长时间</title>
     <url>/2020/03/11/%E4%BD%A0%E4%B8%BA%E5%95%A5%E5%9C%A8%E6%B8%B8%E6%88%8F%E9%87%8C%E8%8A%B1%E6%80%8E%E4%B9%88%E9%95%BF%E6%97%B6%E9%97%B4/</url>
     <content><![CDATA[<p>为啥要在游戏里花大把时间，是什么吸引了我们，相比一些小游戏，它可以起到缓解压力、舒心的效果，但是我们不会花大把时间<br>去玩。但为什么有些游戏，我们会拼命爆肝呢？</p>
