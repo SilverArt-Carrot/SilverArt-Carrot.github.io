@@ -85,6 +85,22 @@
 ]]></content>
   </entry>
   <entry>
+    <title>好用的Chrome插件</title>
+    <url>/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>没有Chrome插件，仿佛操作系统没有了应用程序一样。</p>
+<h3 id="百度药丸"><a href="#百度药丸" class="headerlink" title="百度药丸"></a>百度药丸</h3><p>安装了<strong>百度药丸</strong>Chrome插件，可以屏蔽百度搜索中的一切<strong>垃圾广告</strong></p>
+<p><img src="/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/baidu.PNG" alt="百度药丸"></p>
+<h3 id="bilibili哔哩哔哩下载助手"><a href="#bilibili哔哩哔哩下载助手" class="headerlink" title="bilibili哔哩哔哩下载助手"></a>bilibili哔哩哔哩下载助手</h3><p>这款插件可以将B站中<strong>版权受限</strong>的视频下载到本地，只需安装了插件后在<strong>右下角</strong>点击</p>
+<p><img src="/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/bilibili3.PNG" alt></p>
+<p>这样我们就可以下载了，视频的清晰度是用户调节的播放清晰度</p>
+<p><img src="/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/bilibili2.png" alt></p>
+<h3 id="我要看vip视频"><a href="#我要看vip视频" class="headerlink" title="我要看vip视频"></a>我要看vip视频</h3><p>有了<strong>我要看vip视频</strong>，再也不用担心各大视频网站的VIP、SVIP等等限制了，可以在腾讯、优酷、爱奇艺等等使用哦</p>
+<p><img src="/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/vip.PNG" alt="我要看vip视频"></p>
+<p>在网页空白处点击右键选择即可</p>
+<p><img src="/2020/03/09/%E5%A5%BD%E7%94%A8%E7%9A%84Chrome%E6%8F%92%E4%BB%B6/vip1.png" alt></p>
+]]></content>
+  </entry>
+  <entry>
     <title>代码截图工具之Polacode</title>
     <url>/2020/03/08/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7%E4%B9%8BPolacode/</url>
     <content><![CDATA[<p>如何为代码裁出一张漂亮的截图呢，推荐一款vscode的代码截图工具Polacode，首先我们先安装最新版的<strong>Polacode-2019</strong>.</p>
