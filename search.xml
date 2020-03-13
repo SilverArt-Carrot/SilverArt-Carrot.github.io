@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>10进制转换为各种进制的方法</title>
+    <url>/2020/03/13/10%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>这个其实不难，想写进制转换主要是遇到了一道字串匹配的算法题，需要KMP算法，先看下题目</p>
+<p>给出一个正整数n，我们把1..n在k进制下的表示连起来记为s(n,k)，例如s(16,16)=123456789ABCDEF10, s(5,2)=11011100101。现在对于给定的n和字符串t，我们想知道是否存在一个k(2 ≤ k ≤ 16)，使得t是s(n,k)的子串。</p>
+<p><strong>输入描述</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一行一个整数n(1 ≤ n ≤ 50,000)。</span><br><span class="line">第二行一个字符串t(长度 ≤ 1,000,000)</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出描述</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;yes&quot;表示存在满足条件的k，否则输出&quot;no&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">8</span><br><span class="line">01112</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yes</span><br></pre></td></tr></table></figure>
+
+<p>我的代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">n&#x3D;int(input())</span><br><span class="line">t&#x3D;input()</span><br><span class="line">def get_result(t,n):</span><br><span class="line">    string&#x3D;&#39;&#39;</span><br><span class="line">    string2&#x3D;&#39;&#39;</span><br><span class="line">    l1&#x3D;[&#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;,&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;]</span><br><span class="line">    for k in range(2,17):</span><br><span class="line">        # 各种进制转换</span><br><span class="line">        for i in range(1,n+1):</span><br><span class="line">            while True:       </span><br><span class="line">                s&#x3D;i%k</span><br><span class="line">                string&#x3D;string+l1[s]</span><br><span class="line">                i&#x3D;i&#x2F;&#x2F;k</span><br><span class="line">                if i&#x3D;&#x3D;0:</span><br><span class="line">                    break</span><br><span class="line">            string&#x3D;string[::-1]</span><br><span class="line">            string2&#x3D;string2+string</span><br><span class="line">            string&#x3D;&#39;&#39;</span><br><span class="line">        if t in string2:</span><br><span class="line">            return &#39;yes&#39;</span><br><span class="line">    return &#39;no&#39;</span><br><span class="line">print(get_result(t,n))</span><br></pre></td></tr></table></figure>
+
+<p>这道题首先需要学会各种进制的转换，思路是<strong>倒取余数</strong>，本来是需要KMP算法的，但是我用来Python字符串的in判断方法，这可能是作弊吧哈哈，<br>所以判题系统给了95分……</p>
+<p>KMP算法在之后的博文中会出现的</p>
+<p>PS：题目来自牛客网</p>
+<p><img src="/2020/03/13/10%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E6%96%B9%E6%B3%95/beauty.jpg" alt></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Captcha Cracker</title>
     <url>/2020/03/11/Captcha-Cracker/</url>
     <content><![CDATA[<h2 id="一道简单的暴力枚举算法题"><a href="#一道简单的暴力枚举算法题" class="headerlink" title="一道简单的暴力枚举算法题"></a>一道简单的暴力枚举算法题</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p><a href="http://www.02469.com（本网页纯属虚构，如有雷同，纯属巧合），是一个资源丰富的教学资源网站，好学的SK同学经常访问这个网站。通常来说，网站为了安全考虑，登录的时候都需要用户输入验证码，这就让SK同学非常不爽了。" target="_blank" rel="noopener">www.02469.com（本网页纯属虚构，如有雷同，纯属巧合），是一个资源丰富的教学资源网站，好学的SK同学经常访问这个网站。通常来说，网站为了安全考虑，登录的时候都需要用户输入验证码，这就让SK同学非常不爽了。</a></p>
