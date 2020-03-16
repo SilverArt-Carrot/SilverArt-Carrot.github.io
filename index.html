@@ -70,6 +70,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Django-mysql和部分初始化命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2020-03-16T11:59:48.000Z" itemprop="datePublished">2020-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/">Django+mysql和部分初始化命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在开启一个项目的时候，总会疏漏一些在<strong>settings</strong>里的配置</p>
+<p>在这里我梳理一下Django在settings.py里的配置，和一些常见的Django的命令行代码</p>
+<p>在大多数的Django教程和博客中，连接Mysql用了<strong>pymysql</strong>库，并在总项目的<strong><strong>init</strong>.py</strong>文件中写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+
+<p>但是这样总会多些麻烦，可能在迁移数据库的时候还会报错</p>
+<p>这里推荐使用<strong>mysqlclient</strong>库，这也是Django官方教程里的讲解，并且也不用在<strong>init</strong>.py中写入什么</p>
+<p>在setting.py中的配置</p>
+<p>数据库的配置(这里使用Mysql)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;数据库名&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;用户名&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;密码&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;主机地址&#39;,</span><br><span class="line">        &#39;PORT&#39;: 3306,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>模板文件的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES &#x3D; [</span><br><span class="line">    &#123;</span><br><span class="line">        &#39;BACKEND&#39;: &#39;django.template.backends.django.DjangoTemplates&#39;,</span><br><span class="line">        &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;templates&#39;)],</span><br><span class="line">        &#39;APP_DIRS&#39;: True,</span><br><span class="line">        &#39;OPTIONS&#39;: &#123;</span><br><span class="line">            &#39;context_processors&#39;: [</span><br><span class="line">                &#39;django.template.context_processors.debug&#39;,</span><br><span class="line">                &#39;django.template.context_processors.request&#39;,</span><br><span class="line">                &#39;django.contrib.auth.context_processors.auth&#39;,</span><br><span class="line">                &#39;django.contrib.messages.context_processors.messages&#39;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>将默认的时区改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TIME_ZONE &#x3D; &#39;Asia&#x2F;Shanghai&#39;</span><br></pre></td></tr></table></figure>
+
+<p>创建一个项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject 项目名</span><br></pre></td></tr></table></figure>
+
+<p>创建一个APP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py manage.py startapp app名</span><br></pre></td></tr></table></figure>
+
+<p>生成迁移文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py manage.py makemigrations</span><br></pre></td></tr></table></figure>
+
+<p>数据库迁移</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p>测试页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py manage.py runserver</span><br></pre></td></tr></table></figure>
+
+<p>创建超级用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">py manage.py createsuperuser 用户名</span><br></pre></td></tr></table></figure>
+
+<p>OK，完成了</p>
+<p><img src="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/today.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/" data-id="ck7ug2ul500008gvseo4kdwp2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-10进制转换为各种进制的方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/13/10%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
@@ -173,6 +246,7 @@
 <p>Python不像C、C++那样快速，但是Python有列表，这样就非常方便了，而且语言简洁，书写方便。</p>
 <p><strong>在别人的代码里看到了正则表达式</strong>，这确实是在字符串匹配中高效的方法。</p>
 <p>PS：题目来自牛客网</p>
+<p><img src="/2020/03/11/Captcha-Cracker/today.png" alt></p>
 
       
     </div>
@@ -530,6 +604,10 @@
       <ul>
         
           <li>
+            <a href="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/">Django+mysql和部分初始化命令</a>
+          </li>
+        
+          <li>
             <a href="/2020/03/13/10%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E6%96%B9%E6%B3%95/">10进制转换为各种进制的方法</a>
           </li>
         
@@ -543,10 +621,6 @@
         
           <li>
             <a href="/2020/03/11/%E8%AE%BA%E6%A2%A6%E6%83%B3/">论梦想</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/10/Django-jquery%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95ajax/">Django+jquery实现简单ajax</a>
           </li>
         
       </ul>
