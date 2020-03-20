@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Django使用自定义模板标签 | SilverArt-Carrot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在向模板传递模板变量时，多数用到的是视图函数，如果某个模板变量要重复多次利用，这些内容相对固定和独立，并且在多个页面中出现，一般的做法是写视图函数传递给这些页面，但随着页面多了起来，就要写多个功能相同的视图。 而模板标签就不一样，它可以在任何模板中使用，就像这样的模板标签 123&amp;#123;% static %&amp;#125;&amp;#123;% for %&amp;#125;&amp;#123;% endfor %&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django使用自定义模板标签">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/index.html">
+<meta property="og:site_name" content="SilverArt-Carrot">
+<meta property="og:description" content="在向模板传递模板变量时，多数用到的是视图函数，如果某个模板变量要重复多次利用，这些内容相对固定和独立，并且在多个页面中出现，一般的做法是写视图函数传递给这些页面，但随着页面多了起来，就要写多个功能相同的视图。 而模板标签就不一样，它可以在任何模板中使用，就像这样的模板标签 123&amp;#123;% static %&amp;#125;&amp;#123;% for %&amp;#125;&amp;#123;% endfor %&amp;#1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/today.png">
+<meta property="article:published_time" content="2020-03-20T13:34:32.000Z">
+<meta property="article:modified_time" content="2020-03-20T14:51:13.673Z">
+<meta property="article:author" content="SilverArt-Carrot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/today.png">
+  
+    <link rel="alternate" href="/atom.xml" title="SilverArt-Carrot" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SilverArt-Carrot</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">飞鸿踏雪</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Django使用自定义模板标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/" class="article-date">
+  <time datetime="2020-03-20T13:34:32.000Z" itemprop="datePublished">2020-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django使用自定义模板标签
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在向模板传递模板变量时，多数用到的是视图函数，如果某个模板变量要重复多次利用，这些内容相对固定和独立，并且在多个页面中出现，<br>一般的做法是写视图函数传递给这些页面，但随着页面多了起来，就要写多个功能相同的视图。</p>
+<p>而模板标签就不一样，它可以在任何模板中使用，就像这样的模板标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% static %&#125;</span><br><span class="line">&#123;% for %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模板标签目录结构"><a href="#模板标签目录结构" class="headerlink" title="模板标签目录结构"></a>模板标签目录结构</h2><p>那一个博客项目举例子</p>
+<p>首先在我们的应用下创建一个 templatetags 文件夹。然后在这个文件夹下创建一个 <strong><strong>init</strong></strong>.py 文件，使这个文件夹成为一个 Python 包，之后在 templatetags 目录下创建一个 blog_extras.py 文件，这个文件存放自定义的模板标签代码。</p>
+<p>像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">blog\</span><br><span class="line">    __init__.py</span><br><span class="line">    admin.py</span><br><span class="line">    apps.py</span><br><span class="line">    migrations\</span><br><span class="line">        __init__.py</span><br><span class="line">    models.py</span><br><span class="line">    static\</span><br><span class="line">    templatetags\</span><br><span class="line">        __init__.py</span><br><span class="line">        blog_extras.py</span><br><span class="line">    tests.py</span><br><span class="line">    views.py</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现模板标签逻辑"><a href="#实现模板标签逻辑" class="headerlink" title="实现模板标签逻辑"></a>实现模板标签逻辑</h2><p>在blog_extras.py 文件中实现 show_recent_posts 模板标签的功能，这里要先实例化template类，用inclusion_tag装饰器修饰show_recent_tag函数，第一个参数是模板标签对应的模板，inclusion_tag 装饰器的参数 takes_context 设置为 True 时将告诉 django，在渲染 _recent_posts.html 模板时，不仅传入show_recent_posts 返回的模板变量，同时会传入父模板。（即使用  show_recent_posts  模板标签的模板）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from django import template</span><br><span class="line">from ..models import Post, Category, Tag</span><br><span class="line">register &#x3D; template.Library() </span><br><span class="line"> </span><br><span class="line">@register.inclusion_tag(&#39;blog&#x2F;inclusions&#x2F;_recent_posts.html&#39;, takes_context&#x3D;True)</span><br><span class="line">def show_recent_posts(context, num&#x3D;5):</span><br><span class="line">    return &#123;</span><br><span class="line">        &#39;recent_post_list&#39;: Post.objects.all().order_by(&#39;-created_time&#39;)[:num],</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来就是定义模板 _recent_posts.html 的内容。在 templates\blogs 目录下创建一个 inclusions 文件夹，然后创建一个 _recent_posts.html 文件，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;widget widget-recent-posts&quot;&gt;</span><br><span class="line">  &lt;h3 class&#x3D;&quot;widget-title&quot;&gt;最新文章&lt;&#x2F;h3&gt;</span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">    &#123;% for post in recent_post_list %&#125;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;&#123;&#123; post.get_absolute_url &#125;&#125;&quot;&gt;&#123;&#123; post.title &#125;&#125;&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">    &#123;% empty %&#125;</span><br><span class="line">      暂无文章！</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那么，已经实现了模板标签的逻辑，和模板标签对应的模板，在要使用模板标签的父模板中就可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% show_recent_posts %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，不要忘记先加载模板标签，注意：不要在不使用它的时候加载它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; % load blog_extras % &#125;</span><br></pre></td></tr></table></figure>
+
+<p>OK,大功告成！</p>
+<p><img src="/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/today.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/" data-id="ck809e7po00002svs3gd7fn6e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Django+mysql和部分初始化命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/20/Django%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E6%9D%BF%E6%A0%87%E7%AD%BE/">Django使用自定义模板标签</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/16/Django-mysql%E5%92%8C%E9%83%A8%E5%88%86%E5%88%9D%E5%A7%8B%E5%8C%96%E5%91%BD%E4%BB%A4/">Django+mysql和部分初始化命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/13/10%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E6%96%B9%E6%B3%95/">10进制转换为各种进制的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/11/Captcha-Cracker/">Captcha Cracker</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/11/%E4%BD%A0%E4%B8%BA%E5%95%A5%E5%9C%A8%E6%B8%B8%E6%88%8F%E9%87%8C%E8%8A%B1%E6%80%8E%E4%B9%88%E9%95%BF%E6%97%B6%E9%97%B4/">你为啥在游戏里花怎么长时间</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 SilverArt-Carrot<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="https://static.runoob.com/assets/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof jQuery == 'undefined') {
+document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+}
+// ]]>
+</script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
